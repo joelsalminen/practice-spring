@@ -1,28 +1,72 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./Login.module.css";
 import Input from "./Input";
 import Button from "./Button";
+import { useSpring, useChain, animated } from "react-spring";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [on, setOn] = useState(false);
 
-  const onLoginClick = () => {};
+  const animation1Ref = useRef();
+  const animation1 = useSpring({
+    ref: animation1Ref,
+    from: { transform: "translate3d(-50%, -100%, 0)", opacity: 1 },
+    to: {
+      transform: on ? "translate3d(-50%, 0, 0)" : "translate3d(-50%, -100%, 0)",
+      opacity: on ? 0 : 1,
+    },
+    confit: { friction: 0, tension: 300 },
+  });
+
+  const animation2Ref = useRef();
+  const { x } = useSpring({
+    ref: animation2Ref,
+    from: { x: 0 },
+    to: { x: on ? 1 : 0 },
+  });
+
+  const onLoginClick = () => {
+    setOn(true);
+  };
+
+  useChain(on ? [animation1Ref, animation2Ref] : []);
 
   return (
     <div className={styles.login}>
-      <div className={`${styles.background} ${styles.left}`}></div>
-      <div className={`${styles.background} ${styles.right}`}></div>
+      <animated.div
+        className={styles.background}
+        style={{
+          transform: x.interpolate((x) => `translate3d(${-100 * x}%, 0, 0)`),
+        }}
+      ></animated.div>
 
-      <Input value={username} setValue={setUsername} name="Username" />
-      <Input
-        value={password}
-        setValue={setPassword}
-        name="Password"
-        type="password"
-      />
+      <animated.div
+        className={styles.background}
+        style={{
+          transform: x.interpolate(
+            (x) => `translate3d(${100 + 100 * x}%, 0, 0)`
+          ),
+        }}
+      ></animated.div>
 
-      <Button text="Login" onClick={onLoginClick} />
+      <animated.div
+        style={{ transform: animation1.transform }}
+        className={styles.divider}
+      ></animated.div>
+
+      <animated.div style={{ opacity: animation1.opacity }}>
+        <Input value={username} setValue={setUsername} name="Username" />
+        <Input
+          value={password}
+          setValue={setPassword}
+          name="Password"
+          type="password"
+        />
+
+        <Button text="Login" onClick={onLoginClick} />
+      </animated.div>
     </div>
   );
 };
