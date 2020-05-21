@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./Card.css";
 import { useSpring, animated } from "react-spring";
+import "./Card.css";
 
 const Card = () => {
   const [flipped, setFlipped] = useState(false);
@@ -15,7 +15,6 @@ const Card = () => {
 
   return (
     <div className="Card">
-      <button onClick={flip}>Flip</button>
       <div className="cards" onClick={flip}>
         <animated.div
           style={{
