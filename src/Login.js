@@ -3,6 +3,7 @@ import styles from "./Login.module.css";
 import Input from "./Input";
 import Button from "./Button";
 import { useSpring, useChain, animated } from "react-spring";
+import auth from "./auth";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -28,6 +29,7 @@ const Login = () => {
   });
 
   const onLoginClick = () => {
+    auth.login(username, password);
     setOn(true);
   };
 
