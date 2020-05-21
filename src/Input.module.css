@@ -1,0 +1,14 @@
+.input {
+  display: block;
+  width: 20rem;
+  margin: 0 auto;
+  color: black;
+}
+
+.input label {
+  display: block;
+}
+
+.input input {
+  width: 20rem;
+}

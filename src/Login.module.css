@@ -1,0 +1,22 @@
+.background {
+  width: 50%;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
+}
+
+.left {
+  background-color: tomato;
+  left: 0;
+  border-right: 3px solid black;
+}
+
+.right {
+  background-color: white;
+  right: 0;
+  border-left: 1px solid black;
+}
+
+.login input {
+  display: inline-block;
+}

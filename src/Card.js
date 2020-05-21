@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Card.css";
-import { useSpring, animated, config } from "react-spring";
+import { useSpring, animated } from "react-spring";
 
 const Card = () => {
   const [flipped, setFlipped] = useState(false);
