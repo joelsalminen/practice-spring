@@ -30,12 +30,15 @@ routeNames.forEach((routeName) => {
     _mockDB = {
       ..._mockDB,
       [routeName]: _mockDB[routeName].map((item) => {
+        /* eslint-disable-next-line eqeqeq*/
         if (item.id == req.params.id) {
           return { ...item, ...req.body, id: item.id };
         }
         return item;
       }),
     };
+
+    /* eslint-disable-next-line eqeqeq*/
     const changedItem = _mockDB[routeName].find((i) => i.id == req.params.id);
     res.send(changedItem);
   });
@@ -44,6 +47,7 @@ routeNames.forEach((routeName) => {
     _mockDB = {
       ..._mockDB,
       [routeName]: _mockDB[routeName].filter(
+        /* eslint-disable-next-line eqeqeq*/
         (item) => item._id == req.params.id
       ),
     };

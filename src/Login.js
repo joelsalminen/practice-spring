@@ -6,8 +6,9 @@ import { useSpring, useChain, animated } from "react-spring";
 import auth from "./auth";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("jaakko");
+  const [password, setPassword] = useState("jokershep123");
+  const [error, setError] = useState(null);
   const [on, setOn] = useState(false);
 
   const animation1Ref = useRef();
@@ -28,9 +29,13 @@ const Login = () => {
     to: { x: on ? 1 : 0 },
   });
 
-  const onLoginClick = () => {
-    auth.login(username, password);
-    setOn(true);
+  const onLoginClick = async () => {
+    const error = await auth.login(username, password);
+    if (error) {
+      setError("Login failed");
+    } else {
+      setOn(true);
+    }
   };
 
   useChain(on ? [animation1Ref, animation2Ref] : []);
@@ -66,6 +71,7 @@ const Login = () => {
           name="Password"
           type="password"
         />
+        <p className={styles.error}>{error}</p>
 
         <Button text="Login" onClick={onLoginClick} />
       </animated.div>

@@ -10,6 +10,11 @@
   background-color: rgb(238, 238, 238);
 }
 
+.error {
+  color: tomato;
+  text-align: center;
+}
+
 .login input {
   display: inline-block;
 }
