@@ -63,7 +63,7 @@ routeNames.forEach((routeName) => {
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
   if (username === "jaakko" && password === "jokershep123") {
-    res.send({ token: "3gsi363395dg93", expiresAt: 100000 });
+    return res.send({ token: "3gsi363395dg93", expiresAt: 100000 });
   }
   res.status(400).send({ error: "Login failed" });
 });
